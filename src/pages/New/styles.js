@@ -7,7 +7,7 @@ export const Container = styled.div`
   width: 100%;
 
   max-width: 450px;
-  margin: 0 auto;
+  margin: 80px auto;
   display: flex;
   flex-direction: column;
 
@@ -22,47 +22,53 @@ export const Content = styled.div`
   border-radius: 6px;
   padding: 30px;
 
-  > p {
-    font-size: 22px;
-    line-height: 30px;
-    margin-bottom: 30px;
-  }
-
   form {
     display: flex;
     flex-direction: column;
-  }
 
-  form label {
-    font-size: 14px;
-    color: #444;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
+    label#thumbnail {
+      margin-bottom: 20px;
+      border: 1px dashed #999;
+      background-size: cover;
+      cursor: pointer;
+      height: 160px;
 
-  form input {
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    height: 45px;
-    padding: 0 15px;
-    font-size: 16px;
-  }
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-  button.btn {
-    border: 0;
-    border-radius: 3px;
-    width: 100%;
-    height: 42px;
-    padding: 0 20px;
-    font-size: 16px;
-    font-weight: bold;
-    background: #f05a5b;
-    color: #fff;
-    cursor: pointer;
+      input {
+        display: none;
+      }
+    }
 
-    :hover {
-      background: #e14f50;
+    label#thumbnail.has-thumbnail {
+      border: 0;
+      img {
+        display: none;
+      }
+    }
+
+    label {
+      font-size: 14px;
+      color: #444;
+      font-weight: bold;
+      margin-bottom: 8px;
+
+      span {
+        font-weight: normal;
+        color: #999;
+        font-size: 12px;
+      }
+    }
+
+    input {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      height: 45px;
+      padding: 0 15px;
+      font-size: 16px;
     }
   }
 `;

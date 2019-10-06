@@ -15,7 +15,7 @@ export default createGlobalStyle`
   }
 
   body {
-    background: #000 url('${background}') no-repeat;
+    background: #333 url('${background}') repeat;
     background-size: cover;
     -webkit-font-smoothing: antialiased !important;
   }
@@ -26,5 +26,23 @@ export default createGlobalStyle`
 
   ul{
     list-style: none;
+  }
+
+  button.btn {
+    border: 0;
+    border-radius: 3px;
+    width: 100%;
+    height: 42px;
+    padding: 0 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #f05a5b;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 5px;
+
+    :hover {
+      background: #e14f50;
+    }
   }
 `;
