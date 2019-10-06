@@ -1,24 +1,29 @@
 import React, { useState } from "react";
 import api from "../../Services/api";
 
+import { Container, Content } from "./styles";
+
 import logo from "../../assets/logo.svg";
 import background from "../../assets/background.jpg";
 
-import { Container, Content } from "./styles";
-
-function Login() {
+function Login({ history }) {
   const [email, setEmail] = useState("");
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     const response = await api.post("/sessions", { email });
+
+    const { _id } = response.data;
+
+    localStorage.setItem("user", _id);
+
+    history.push("/dashboard");
   }
 
   return (
     <Container background={background}>
       <img src={logo} alt="Aircnc" />
-
       <Content>
         <p>
           Ofereça <strong>spots</strong> parar programadores e encontre{" "}
