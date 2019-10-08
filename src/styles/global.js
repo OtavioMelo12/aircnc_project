@@ -39,10 +39,13 @@ export default createGlobalStyle`
     background: #f05a5b;
     color: #fff;
     cursor: pointer;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+
+
 
     :hover {
       background: #e14f50;
+      transform: translate(0, -4px);
     }
   }
 `;

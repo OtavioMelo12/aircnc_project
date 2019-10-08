@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from "react";
 import api from "../../Services/api";
 
+import { Link } from "react-router-dom";
+
 import { Container, Content } from "./styles";
 
 import logo from "../../assets/logo.svg";
@@ -17,6 +19,23 @@ function New({ history }) {
     return thumbnail ? URL.createObjectURL(thumbnail) : null;
   }, [thumbnail]);
 
+  function setLoading(loading = true) {
+    if (loading) {
+      console.log("LOADING");
+      let buttonEl = document.getElementById("btn");
+      let strongEl = document.getElementById("str");
+
+      let loadingEL = document.createElement("strong");
+      loadingEL.appendChild(document.createTextNode("  LOADING"));
+      loadingEL.setAttribute("id", "loading");
+
+      buttonEl.removeChild(strongEl);
+      buttonEl.appendChild(loadingEL);
+    } else {
+      console.log("LOADED");
+    }
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -28,9 +47,32 @@ function New({ history }) {
     data.append("techs", techs);
     data.append("price", price);
 
+    if (!thumbnail || !company || !techs) {
+      let formEl = document.getElementById("new-form");
+
+      let alreadyExists = document.getElementById("no-infomations");
+
+      if (alreadyExists) {
+        return;
+      } else {
+        let noInformationsEl = document.createElement("label");
+        noInformationsEl.appendChild(
+          document.createTextNode("Insira todas informações necessárias !")
+        );
+        noInformationsEl.setAttribute("id", "no-infomations");
+
+        formEl.appendChild(noInformationsEl);
+      }
+      return console.log("SEM INFORMAÇOES");
+    }
+
+    setLoading();
+
     await api.post("/spots", data, {
       headers: { user_id }
     });
+
+    setLoading(false);
 
     history.push("/dashboard");
   }
@@ -39,7 +81,7 @@ function New({ history }) {
     <Container background={background}>
       <img src={logo} alt="Aircnc" />
       <Content>
-        <form onSubmit={handleSubmit}>
+        <form id="new-form" onSubmit={handleSubmit}>
           <label
             id="thumbnail"
             style={{ backgroundImage: `url(${preview})` }}
@@ -80,9 +122,12 @@ function New({ history }) {
             onChange={event => setPrice(event.target.value)}
           />
 
-          <button type="submit" className="btn">
-            Cadastrar
+          <button type="submit" className="btn" id="btn">
+            <strong id="str">Cadastrar </strong>
           </button>
+          <Link to="/dashboard">
+            <button className="btn">Voltar</button>
+          </Link>
         </form>
       </Content>
     </Container>
